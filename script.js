@@ -19,12 +19,16 @@ const eight = document.getElementById("eight");
 const nine = document.getElementById("nine");
 const zero = document.getElementById("zero");
 
+const scrollToRight = () => {
+  input.scrollLeft = input.scrollWidth;
+};
 one.addEventListener("click", () => {
   if (input.value === "0") {
     input.value = "1";
   } else {
     input.value += "1";
   }
+  scrollToRight();
 });
 two.addEventListener("click", () => {
   if (input.value === "0") {
@@ -32,6 +36,7 @@ two.addEventListener("click", () => {
   } else {
     input.value += "2";
   }
+  scrollToRight();
 });
 three.addEventListener("click", () => {
   if (input.value === "0") {
@@ -39,6 +44,7 @@ three.addEventListener("click", () => {
   } else {
     input.value += "3";
   }
+  scrollToRight();
 });
 four.addEventListener("click", () => {
   if (input.value === "0") {
@@ -46,6 +52,7 @@ four.addEventListener("click", () => {
   } else {
     input.value += "4";
   }
+  scrollToRight();
 });
 five.addEventListener("click", () => {
   if (input.value === "0") {
@@ -53,6 +60,7 @@ five.addEventListener("click", () => {
   } else {
     input.value += "5";
   }
+  scrollToRight();
 });
 six.addEventListener("click", () => {
   if (input.value === "0") {
@@ -60,6 +68,7 @@ six.addEventListener("click", () => {
   } else {
     input.value += "6";
   }
+  scrollToRight();
 });
 seven.addEventListener("click", () => {
   if (input.value === "0") {
@@ -67,6 +76,7 @@ seven.addEventListener("click", () => {
   } else {
     input.value += "7";
   }
+  scrollToRight();
 });
 eight.addEventListener("click", () => {
   if (input.value === "0") {
@@ -74,6 +84,7 @@ eight.addEventListener("click", () => {
   } else {
     input.value += "8";
   }
+  scrollToRight();
 });
 nine.addEventListener("click", () => {
   if (input.value === "0") {
@@ -81,6 +92,7 @@ nine.addEventListener("click", () => {
   } else {
     input.value += "9";
   }
+  scrollToRight();
 });
 zero.addEventListener("click", () => {
   if (input.value === "0") {
@@ -88,6 +100,7 @@ zero.addEventListener("click", () => {
   } else {
     input.value += "0";
   }
+  scrollToRight();
 });
 dot.addEventListener("click", () => {
   if (input.value === "") {
@@ -99,6 +112,7 @@ dot.addEventListener("click", () => {
       input.value += ".";
     }
   }
+  scrollToRight();
 });
 nemehHasah.addEventListener("click", () => {});
 clear.addEventListener("click", () => {
