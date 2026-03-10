@@ -2,9 +2,10 @@ const input = document.getElementById("input");
 const backspace = document.getElementById("backspace");
 const clear = document.getElementById("clear");
 const percentage = document.getElementById("percentage");
-const huvaaah = document.getElementById("huvaah");
+const huvaah = document.getElementById("huvaah");
 const urjih = document.getElementById("urjih");
 const hasah = document.getElementById("hasah");
+const sum = document.getElementById("sum");
 const nemehHasah = document.getElementById("nemehHasah");
 const dot = document.getElementById("dot");
 const tentsuu = document.getElementById("tentsuu");
@@ -114,7 +115,175 @@ dot.addEventListener("click", () => {
   }
   scrollToRight();
 });
-nemehHasah.addEventListener("click", () => {});
+nemehHasah.addEventListener("click", () => {
+  if (input.value.startsWith("-")) {
+    if (input.value === "-") {
+      input.value += "";
+    } else {
+      input.value = input.value.slice(1);
+    }
+  } else if (tenc === "") {
+    input.value = "";
+  } else {
+    input.value = "-" + input.value;
+  }
+  scrollToRight();
+});
 clear.addEventListener("click", () => {
   input.value = "";
+});
+backspace.addEventListener("click", () => {
+  input.value = input.value.slice(0, -1);
+  scrollToRight();
+});
+percentage.addEventListener("click", () => {
+  let tilt = input.value;
+  let lastTwo = tilt.slice(-2);
+  if (input.value === "-") {
+    input.value = "";
+  } else if (
+    input.value.endsWith("+") ||
+    input.value.endsWith("-") ||
+    input.value.endsWith("x") ||
+    input.value.endsWith("/") ||
+    input.value.endsWith("%")
+  ) {
+    if (
+      tilt.endsWith("-") &&
+      (lastTwo.startsWith("+") ||
+        lastTwo.startsWith("x") ||
+        lastTwo.startsWith("/") ||
+        lastTwo.startsWith("%"))
+    ) {
+      input.value = tilt.slice(0, -2) + "%";
+    } else {
+      input.value = input.value.slice(0, -1) + "%";
+    }
+  } else if (input.value === "") {
+    input.value += "";
+  } else {
+    input.value += "%";
+  }
+  scrollToRight();
+});
+huvaah.addEventListener("click", () => {
+  let tilt = input.value;
+  let lastTwo = tilt.slice(-2);
+  if (input.value === "-") {
+    input.value = "";
+  } else if (
+    input.value.endsWith("+") ||
+    input.value.endsWith("-") ||
+    input.value.endsWith("x") ||
+    input.value.endsWith("/") ||
+    input.value.endsWith("%")
+  ) {
+    if (
+      tilt.endsWith("-") &&
+      (lastTwo.startsWith("+") ||
+        lastTwo.startsWith("x") ||
+        lastTwo.startsWith("/") ||
+        lastTwo.startsWith("%"))
+    ) {
+      input.value = tilt.slice(0, -2) + "/";
+    } else {
+      input.value = input.value.slice(0, -1) + "/";
+    }
+  } else if (input.value === "") {
+    input.value += "";
+  } else {
+    input.value += "/";
+  }
+  scrollToRight();
+});
+urjih.addEventListener("click", () => {
+  let tilt = input.value;
+  let lastTwo = tilt.slice(-2);
+  if (input.value === "-") {
+    input.value = "";
+  } else if (
+    input.value.endsWith("+") ||
+    input.value.endsWith("-") ||
+    input.value.endsWith("x") ||
+    input.value.endsWith("/") ||
+    input.value.endsWith("%")
+  ) {
+    if (
+      tilt.endsWith("-") &&
+      (lastTwo.startsWith("+") ||
+        lastTwo.startsWith("x") ||
+        lastTwo.startsWith("/") ||
+        lastTwo.startsWith("%"))
+    ) {
+      input.value = tilt.slice(0, -2) + "x";
+    } else {
+      input.value = input.value.slice(0, -1) + "x";
+    }
+  } else if (input.value === "") {
+    input.value += "";
+  } else {
+    input.value += "x";
+  }
+  scrollToRight();
+});
+sum.addEventListener("click", () => {
+  let tilt = input.value;
+  let lastTwo = tilt.slice(-2);
+  if (input.value === "-") {
+    input.value = "";
+  } else if (
+    input.value.endsWith("+") ||
+    input.value.endsWith("-") ||
+    input.value.endsWith("x") ||
+    input.value.endsWith("/") ||
+    input.value.endsWith("%")
+  ) {
+    if (
+      tilt.endsWith("-") &&
+      (lastTwo.startsWith("+") ||
+        lastTwo.startsWith("x") ||
+        lastTwo.startsWith("/") ||
+        lastTwo.startsWith("%"))
+    ) {
+      input.value = tilt.slice(0, -2) + "+";
+    } else {
+      input.value = input.value.slice(0, -1) + "+";
+    }
+  } else if (input.value === "") {
+    input.value += "";
+  } else {
+    input.value += "+";
+  }
+  scrollToRight();
+});
+hasah.addEventListener("click", () => {
+  if (input.value.endsWith("-")) {
+    input.value += "";
+  } else {
+    input.value += "-";
+  }
+  scrollToRight();
+});
+tentsuu.addEventListener("click", () => {
+  let tenc = input.value;
+  if (tenc.includes("x")) {
+    tenc = tenc.replaceAll("x", "*");
+  }
+  if (tenc.includes("%")) {
+    if (tenc.endsWith("%")) {
+      let huviToo = tenc.split("%").length - 1;
+      if (huviToo > 1) {
+        input.value = "0";
+      } else {
+        input.value = eval(tenc.replace("%", "*0.01"));
+      }
+    } else {
+      input.value = "0";
+    }
+  } else if (tenc === "") {
+    input.value = "";
+  } else {
+    input.value = eval(tenc);
+  }
+  scrollToRight();
 });
