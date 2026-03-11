@@ -19,10 +19,15 @@ const seven = document.getElementById("seven");
 const eight = document.getElementById("eight");
 const nine = document.getElementById("nine");
 const zero = document.getElementById("zero");
+const history = document.getElementById("history");
 
 const scrollToRight = () => {
   input.scrollLeft = input.scrollWidth;
 };
+const scrollhistory = () => {
+  history.scrollLeft = history.scrollWidth;
+};
+
 one.addEventListener("click", () => {
   if (input.value === "0") {
     input.value = "1";
@@ -116,16 +121,29 @@ dot.addEventListener("click", () => {
   scrollToRight();
 });
 nemehHasah.addEventListener("click", () => {
-  if (input.value.startsWith("-")) {
-    if (input.value === "-") {
-      input.value += "";
-    } else {
-      input.value = input.value.slice(1);
-    }
-  } else if (tenc === "") {
-    input.value = "";
+  if (
+    input.value.includes("+") ||
+    input.value.includes("x") ||
+    input.value.includes("%") ||
+    input.value.includes("/")
+  ) {
+    return;
   } else {
-    input.value = "-" + input.value;
+    if (input.value.startsWith("-")) {
+      if (input.value.split("-").length - 1 > 1) {
+        return;
+      } else if (input.value === "-") {
+        input.value += "";
+      } else {
+        input.value = input.value.slice(1);
+      }
+    } else if (input.value.split("-").length - 1 > 1) {
+      return;
+    } else if (input.value === "") {
+      input.value = "";
+    } else {
+      input.value = "-" + input.value;
+    }
   }
   scrollToRight();
 });
@@ -266,6 +284,10 @@ hasah.addEventListener("click", () => {
 });
 tentsuu.addEventListener("click", () => {
   let tenc = input.value;
+  if (tenc !== "") {
+    history.innerText = tenc;
+    history.classList.remove("hidden");
+  }
   if (tenc.includes("x")) {
     tenc = tenc.replaceAll("x", "*");
   }
@@ -286,4 +308,68 @@ tentsuu.addEventListener("click", () => {
     input.value = eval(tenc);
   }
   scrollToRight();
+  scrollhistory();
+});
+
+history.addEventListener("click", () => {
+  input.value = history.innerText;
+  history.classList.add("hidden");
+});
+
+// keyboard support
+
+const keyMap = {
+  0: "zero",
+  1: "one",
+  2: "two",
+  3: "three",
+  4: "four",
+  5: "five",
+  6: "six",
+  7: "seven",
+  8: "eight",
+  9: "nine",
+  ".": "dot",
+  ",": "dot",
+  "+": "sum",
+  "-": "hasah",
+  "*": "urjih",
+  "/": "huvaah",
+  "%": "percentage",
+  Enter: "tentsuu",
+  "=": "tentsuu",
+  Backspace: "backspace",
+  Escape: "clear",
+  Delete: "clear",
+};
+
+document.querySelectorAll(".button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (btn.id !== "tentsuu") {
+      history.classList.add("hidden");
+    }
+  });
+});
+
+window.addEventListener("keydown", (event) => {
+  const buttonId = keyMap[event.key];
+  // if (typeof buttonId === "string")
+  if (buttonId) {
+    event.preventDefault();
+    const btn = document.getElementById(buttonId);
+    if (buttonId !== "tentsuu") {
+      history.classList.add("hidden");
+    }
+
+    btn.classList.add("kbsup");
+    btn.click();
+  }
+});
+
+window.addEventListener("keyup", (event) => {
+  const buttonId = keyMap[event.key];
+  if (buttonId) {
+    const btn = document.getElementById(buttonId);
+    btn.classList.remove("kbsup");
+  }
 });
