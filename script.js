@@ -29,82 +29,142 @@ const scrollhistory = () => {
 };
 
 one.addEventListener("click", () => {
-  if (input.value === "0") {
-    input.value = "1";
+  let tiirsen = input.value;
+  let tiirsenLast = tiirsen.slice(0, -1);
+  if (/[+/%x-]0$/.test(input.value)) {
+    input.value = tiirsenLast + "1";
   } else {
-    input.value += "1";
+    if (input.value === "0") {
+      input.value = "1";
+    } else {
+      input.value += "1";
+    }
   }
   scrollToRight();
 });
 two.addEventListener("click", () => {
-  if (input.value === "0") {
-    input.value = "2";
+  let tiirsen = input.value;
+  let tiirsenLast = tiirsen.slice(0, -1);
+  if (/[+/%x-]0$/.test(input.value)) {
+    input.value = tiirsenLast + "2";
   } else {
-    input.value += "2";
+    if (input.value === "0") {
+      input.value = "2";
+    } else {
+      input.value += "2";
+    }
   }
   scrollToRight();
 });
 three.addEventListener("click", () => {
-  if (input.value === "0") {
-    input.value = "3";
+  let tiirsen = input.value;
+  let tiirsenLast = tiirsen.slice(0, -1);
+  if (/[+/%x-]0$/.test(input.value)) {
+    input.value = tiirsenLast + "3";
   } else {
-    input.value += "3";
+    if (input.value === "0") {
+      input.value = "3";
+    } else {
+      input.value += "3";
+    }
   }
   scrollToRight();
 });
 four.addEventListener("click", () => {
-  if (input.value === "0") {
-    input.value = "4";
+  let tiirsen = input.value;
+  let tiirsenLast = tiirsen.slice(0, -1);
+  if (/[+/%x-]0$/.test(input.value)) {
+    input.value = tiirsenLast + "4";
   } else {
-    input.value += "4";
+    if (input.value === "0") {
+      input.value = "4";
+    } else {
+      input.value += "4";
+    }
   }
   scrollToRight();
 });
 five.addEventListener("click", () => {
-  if (input.value === "0") {
-    input.value = "5";
+  let tiirsen = input.value;
+  let tiirsenLast = tiirsen.slice(0, -1);
+  if (/[+/%x-]0$/.test(input.value)) {
+    input.value = tiirsenLast + "5";
   } else {
-    input.value += "5";
+    if (input.value === "0") {
+      input.value = "5";
+    } else {
+      input.value += "5";
+    }
   }
   scrollToRight();
 });
 six.addEventListener("click", () => {
-  if (input.value === "0") {
-    input.value = "6";
+  let tiirsen = input.value;
+  let tiirsenLast = tiirsen.slice(0, -1);
+  if (/[+/%x-]0$/.test(input.value)) {
+    input.value = tiirsenLast + "6";
   } else {
-    input.value += "6";
+    if (input.value === "0") {
+      input.value = "6";
+    } else {
+      input.value += "6";
+    }
   }
   scrollToRight();
 });
 seven.addEventListener("click", () => {
-  if (input.value === "0") {
-    input.value = "7";
+  let tiirsen = input.value;
+  let tiirsenLast = tiirsen.slice(0, -1);
+  if (/[+/%x-]0$/.test(input.value)) {
+    input.value = tiirsenLast + "7";
   } else {
-    input.value += "7";
+    if (input.value === "0") {
+      input.value = "7";
+    } else {
+      input.value += "7";
+    }
   }
   scrollToRight();
 });
 eight.addEventListener("click", () => {
-  if (input.value === "0") {
-    input.value = "8";
+  let tiirsen = input.value;
+  let tiirsenLast = tiirsen.slice(0, -1);
+  if (/[+/%x-]0$/.test(input.value)) {
+    input.value = tiirsenLast + "8";
   } else {
-    input.value += "8";
+    if (input.value === "0") {
+      input.value = "8";
+    } else {
+      input.value += "8";
+    }
   }
   scrollToRight();
 });
 nine.addEventListener("click", () => {
-  if (input.value === "0") {
-    input.value = "9";
+  let tiirsen = input.value;
+  let tiirsenLast = tiirsen.slice(0, -1);
+  if (/[+/%x-]0$/.test(input.value)) {
+    input.value = tiirsenLast + "9";
   } else {
-    input.value += "9";
+    if (input.value === "0") {
+      input.value = "9";
+    } else {
+      input.value += "9";
+    }
   }
   scrollToRight();
 });
 zero.addEventListener("click", () => {
-  if (input.value === "0") {
-    input.value = "0";
-  } else {
+  if (/[+/%x-]$/.test(input.value)) {
     input.value += "0";
+  } else if (/[+/%x-]0$/.test(input.value)) {
+    input.value += "";
+  } else {
+    if (input.value === "0") {
+      input.value = "0";
+    } else {
+      input.value += "0";
+    }
   }
   scrollToRight();
 });
@@ -284,28 +344,32 @@ hasah.addEventListener("click", () => {
 });
 tentsuu.addEventListener("click", () => {
   let tenc = input.value;
-  if (tenc !== "") {
-    history.innerText = tenc;
-    history.classList.remove("hidden");
-  }
-  if (tenc.includes("x")) {
-    tenc = tenc.replaceAll("x", "*");
-  }
-  if (tenc.includes("%")) {
-    if (tenc.endsWith("%")) {
-      let huviToo = tenc.split("%").length - 1;
-      if (huviToo > 1) {
-        input.value = "0";
-      } else {
-        input.value = eval(tenc.replace("%", "*0.01"));
-      }
-    } else {
-      input.value = "0";
+  if (/[+/%x-]/.test(input.value)) {
+    if (tenc !== "") {
+      history.innerText = tenc;
+      history.classList.remove("hidden");
     }
-  } else if (tenc === "") {
-    input.value = "";
+    if (tenc.includes("x")) {
+      tenc = tenc.replaceAll("x", "*");
+    }
+    if (tenc.includes("%")) {
+      if (tenc.endsWith("%")) {
+        let huviToo = tenc.split("%").length - 1;
+        if (huviToo > 1) {
+          input.value = "0";
+        } else {
+          input.value = eval(tenc.replace("%", "*0.01"));
+        }
+      } else {
+        input.value = "0";
+      }
+    } else if (tenc === "") {
+      input.value = "";
+    } else {
+      input.value = eval(tenc);
+    }
   } else {
-    input.value = eval(tenc);
+    return;
   }
   scrollToRight();
   scrollhistory();
