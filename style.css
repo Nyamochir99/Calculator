@@ -79,17 +79,20 @@ body {
   font-size: 30px;
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
-  overflow: auto;
-  scrollbar-width: none;
-  overflow-y: hidden;
+  text-align: right;
+  white-space: nowrap;
 }
 .overflow {
   width: 390px;
+  max-width: 390px;
+  display: block;
   height: 30px;
-  padding: 0 30px;
+  margin: 0 30px;
   margin-bottom: 10px;
-  display: flex;
-  justify-content: flex-end;
+  overflow: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  overflow-y: hidden;
 }
 .hidden {
   display: none;

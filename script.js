@@ -24,9 +24,11 @@ const history = document.getElementById("history");
 const scrollToRight = () => {
   input.scrollLeft = input.scrollWidth;
 };
-const scrollhistory = () => {
+const scrollHistory = () => {
   history.scrollLeft = history.scrollWidth;
 };
+
+let hariu = false;
 
 one.addEventListener("click", () => {
   let tiirsen = input.value;
@@ -344,40 +346,62 @@ hasah.addEventListener("click", () => {
 });
 tentsuu.addEventListener("click", () => {
   let tenc = input.value;
+  let tiirchlee = tenc.slice(0, -1);
+  let blyat;
+  if (tenc === "" || tenc === "-") {
+    return;
+  }
+  let tiltProMax = tenc.startsWith("-") ? tenc.slice(1) : tenc;
+  if (!/[+/%x-]/.test(tiltProMax)) {
+    return;
+  }
+  // let boliyoo = /[+/%x-]$/.test(tenc) ? tenc.slice(0, -1) : tenc;
+  // let boliiPls = boliyoo.startsWith("-") ? boliyoo.slice(1) : boliyoo;
+  if (/[+/%x-]$/.test(tenc)) {
+    return;
+  }
+
+  if (tenc.includes("x")) {
+    tenc = tenc.replaceAll("x", "*");
+  }
+  if (tiirchlee.includes("x")) {
+    tiirchlee = tiirchlee.replaceAll("x", "*");
+  }
   if (/[+/%x-]/.test(input.value)) {
-    if (tenc !== "") {
-      history.innerText = tenc;
-      history.classList.remove("hidden");
-    }
-    if (tenc.includes("x")) {
-      tenc = tenc.replaceAll("x", "*");
-    }
     if (tenc.includes("%")) {
       if (tenc.endsWith("%")) {
         let huviToo = tenc.split("%").length - 1;
         if (huviToo > 1) {
-          input.value = "0";
+          blyat = "0";
         } else {
-          input.value = eval(tenc.replace("%", "*0.01"));
+          blyat = eval(tenc.replace("%", "*0.01"));
         }
       } else {
-        input.value = "0";
+        blyat = "0";
       }
     } else if (tenc === "") {
-      input.value = "";
+      blyat = "";
     } else {
-      input.value = eval(tenc);
+      blyat = eval(tenc);
     }
   } else {
     return;
   }
+  if (!isFinite(blyat)) {
+    return;
+  }
+  history.innerText = input.value;
+  history.classList.remove("hidden");
+  input.value = blyat;
+  hariu = true;
   scrollToRight();
-  scrollhistory();
+  scrollHistory();
 });
 
 history.addEventListener("click", () => {
   input.value = history.innerText;
   history.classList.add("hidden");
+  scrollToRight();
 });
 
 // keyboard support
